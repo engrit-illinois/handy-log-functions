@@ -78,8 +78,22 @@ function log {
 		[switch]$NoConsole, # skip outputting to console
 		[switch]$NoLog # skip logging to file
 	)
-
 	if($E) { $FC = "Red" }
+
+	$ofParams = @{
+		"FilePath" = $Log
+		"Append" = $true
+	}
+	
+	$whParams = @{}
+	
+	if($NoNL) {
+		$ofParams.NoNewLine = $true
+		$whParams.NoNewLine = $true
+	}
+	
+	if($FC) { $whParams.ForegroundColor = $FC }
+	if($BC) { $whParams.BackgroundColor = $BC }
 
 	# Custom indent per message, good for making output much more readable
 	for($i = 0; $i -lt $L; $i += 1) {
@@ -110,13 +124,8 @@ function log {
 					New-Item -ItemType "File" -Force -Path $Log | Out-Null
 					log "Logging to `"$Log`"."
 				}
-
-				if($NoNL) {
-					$Msg | Out-File $Log -Append -NoNewline
-				}
-				else {
-					$Msg | Out-File $Log -Append
-				}
+				
+				$Msg | Out-File @ofParams
 			}
 		}
 
@@ -128,13 +137,8 @@ function log {
 			
 			# If using the $Loud parameter, use this instead of the above if():
 			#if($Loud) {
-
-				if($NoNL) {
-					Write-Host $Msg -NoNewline -ForegroundColor $FC -BackgroundColor $BC
-				}
-				else {
-					Write-Host $Msg -ForegroundColor $FC -BackgroundColor $BC
-				}
+				
+				Write-Host $Msg @whParams
 			}
 		}
 	}
