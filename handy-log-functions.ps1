@@ -34,7 +34,6 @@ param(
 	#[string]$LogLineTimestampFormat = "[yyyy-MM-dd HH:mm:ss:ffff] ", # Full timestamp
 	#[string]$LogLineTimestampFormat = $null, # No timestamp
 	
-	# 
 	[int]$Verbosity = 0
 )
 
