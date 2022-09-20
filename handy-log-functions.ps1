@@ -63,6 +63,9 @@ function log {
 	param (
 		[Parameter(Position=0)]
 		[string]$Msg = "",
+		
+		# Replace this value with whatever the default value of the full log file path should be
+		[string]$Log = $Log,
 
 		[int]$L = 0, # level of indentation
 		[int]$V = 0, # verbosity level
