@@ -27,7 +27,7 @@ Optional switch.
 If specified, progress output is not logged to the console.  
 
 ### -Loud
-_Note: This is an alternative to -NoConsoleOutput, see comments in the code and use one or the other_
+_Note: This is an alternative to -NoConsoleOutput, see comments in the code and use one or the other._  
 Optional switch.  
 If specified, progress output is logged to the console.
 
