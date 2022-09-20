@@ -104,7 +104,7 @@ function log {
 
 	# Add timestamp to each message
 	# $NoTS parameter useful for making things like tables look cleaner
-	if(!$NoTS) {
+	if(-not $NoTS) {
 		if($LogLineTimestampFormat) {
 			$ts = Get-Date -Format $LogLineTimestampFormat
 		}
@@ -116,7 +116,7 @@ function log {
 	if($V -le $Verbosity) {
 
 		# Check if this particular message is supposed to be logged
-		if(!$NoLog) {
+		if(-not $NoLog) {
 
 			# Check if we're allowing logging
 			if($Log) {
@@ -132,10 +132,10 @@ function log {
 		}
 
 		# Check if this particular message is supposed to be output to console
-		if(!$NoConsole) {
+		if(-not $NoConsole) {
 
 			# Check if we're allowing console output at all
-			if(!$NoConsoleOutput) {
+			if(-not $NoConsoleOutput) {
 			
 			# If using the $Loud parameter, use this instead of the above if():
 			#if($Loud) {
