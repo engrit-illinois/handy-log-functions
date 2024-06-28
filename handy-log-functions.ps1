@@ -223,3 +223,28 @@ catch {
 	Write-Host ($_ | ConvertTo-Json)
 }
 
+# -----------------------------------------------------------------------------
+# Re-use an existing function in the parent scope/runspace inside a ForEach-Object -Parallel loop:
+# https://tighetec.co.uk/2022/06/01/passing-functions-to-foreach-parallel-loop/
+# -----------------------------------------------------------------------------
+
+# Define function
+$prefix = "prefix"
+function log($msg) {
+	Write-Host "[$prefix] $msg"
+}
+
+# Save function as string variable
+$logFunction = ${function:log}.ToString()
+ 
+@(1, 2, 3) | ForEach-Object -Parallel {
+	# Recreate function in local parallel scope
+	${function:log} = $using:logFunction
+	
+	# Make sure to also define any parent-scope variables used by the function!
+	$prefix = $using:prefix
+	
+	# Use function
+    	log $_
+}
+
