@@ -235,11 +235,11 @@ function log($msg) {
 }
 
 # Save function as string variable
-$logFunction = ${function:log}.ToString()
+$logFunctionAsString = ${function:log}.ToString()
  
 @(1, 2, 3) | ForEach-Object -Parallel {
 	# Recreate function in local parallel scope
-	${function:log} = $using:logFunction
+	${function:log} = $using:logFunctionAsString
 	
 	# Make sure to also define any parent-scope variables used by the function!
 	$prefix = $using:prefix
